@@ -1,0 +1,34 @@
+[
+	{
+		"name": "Aldo",
+		"surnames": "Huaman Martinez",
+		"email": "aldo.huaman.m@gmail.com",
+		"dni": "43795530",
+		"creationDate": "2022-01-17T02:18:07.816+00:00",
+		"birthDate": "1986-10-06T00:00:00.000Z"
+	},
+	{
+		"name": "Juan",
+		"surnames": "Perez",
+		"email": "juan.perez.p@gmail.com",
+		"dni": "48651488",
+		"creationDate": "2022-01-17T04:52:03.807+00:00",
+		"birthDate": "1990-10-07T00:00:00.000Z"
+	},
+	{
+		"name": "Luis",
+		"surnames": "Garcia",
+		"email": "Luis.Garcia.p@gmail.com",
+		"dni": "48651499",
+		"creationDate": "2022-01-17T05:22:18.654+00:00",
+		"birthDate": "1990-10-21T00:00:00.000Z"
+	},
+	{
+		"name": "Claudia",
+		"surnames": "Mundaca",
+		"email": "claudia.mundaca.p@gmail.com",
+		"dni": "48651412",
+		"creationDate": "2022-01-17T05:39:40.566+00:00",
+		"birthDate": "1988-01-21T00:00:00.000Z"
+	}
+]

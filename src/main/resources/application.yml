@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      database: irdigitalbackend
+      uri: 'mongodb+srv://irdigitalreto:passowrd123@cluster0.tf896.mongodb.net/irdigitalbackend?retryWrites=true&w=majority'

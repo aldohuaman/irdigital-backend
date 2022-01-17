@@ -1,0 +1,121 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /createClient:
+    post:
+      tags:
+        - client-controller
+      operationId: createClient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClientWebDto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateClientWebDto'
+  /listclients:
+    get:
+      tags:
+        - client-controller
+      operationId: listClients
+      parameters:
+        - name: dni
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListClientWebDto'
+  /indicators:
+    get:
+      tags:
+        - client-controller
+      operationId: getIndicators
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetIndicatorsWebDto'
+components:
+  schemas:
+    ClientWebDto:
+      required:
+        - dni
+        - email
+      type: object
+      properties:
+        nombre:
+          type: string
+        apellido:
+          type: string
+        email:
+          type: string
+        dni:
+          type: string
+        fechaCreacion:
+          type: string
+          format: date-time
+        fechaNacimiento:
+          type: string
+          format: date-time
+    CreateClientWebDto:
+      type: object
+      properties:
+        resultProcess:
+          type: string
+        cliente:
+          $ref: '#/components/schemas/ClientWebDto'
+    ListClientWebDto:
+      type: object
+      properties:
+        clientes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientWebDto'
+    BirthRate:
+      type: object
+      properties:
+        month:
+          type: string
+        rate:
+          type: number
+          format: double
+    GetIndicatorsWebDto:
+      type: object
+      properties:
+        birthByMonth:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+        maxBirthDate:
+          type: string
+        minBirthDate:
+          type: string
+        birthRate:
+          type: array
+          items:
+            $ref: '#/components/schemas/BirthRate'

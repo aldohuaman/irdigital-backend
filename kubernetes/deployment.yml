@@ -1,0 +1,55 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: reto-001
+  namespace: eu2-irdigitalreto-dev-01
+  labels:
+    product: clientes
+    app: irdigitalreto-001
+    tier: backend
+    phase: dev
+    deployment: v1
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        product: clientes
+        app: irdigitalreto-001
+        tier: backend
+        phase: dev
+        deployment: v1
+    spec:
+      containers:
+        - image: ${containerRegistryServer}/irdigitalreto:0.0.1
+          name: reto-001
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 128Mi
+            limits:
+              memory: 512Mi
+          env:
+            - name: JAVA_OPTIONS
+              value: -Xms64m -Xmx128m
+          volumeMounts:
+            - mountPath: /data
+              name: azurefilestorage
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 30
+      volumes:
+        - name: azurefilestorage
+          azureFile:
+            secretName: azure-storage-secret
+            shareName: share-name
+            readOnly: false
+      imagePullSecrets:
+        - name: azure-registry-secret
