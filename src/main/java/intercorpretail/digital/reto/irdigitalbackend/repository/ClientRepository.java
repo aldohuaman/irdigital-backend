@@ -12,4 +12,6 @@ public interface ClientRepository extends MongoRepository<Client, String>{
 	List<Client> findByEmail(@Param("email") String email);
 	
 	List<Client> findByDni(@Param("dni") String dni);
+	
+	Boolean existsByDniOrEmail(@Param("dni") String dni, @Param("email") String email);
 }

@@ -72,6 +72,7 @@ public class ClientControllerTest {
 		createClientWebDto.setClient(clientWebDto);
 		
 		when(repository.insert(any(Client.class))).thenReturn(new Client());
+		when(repository.existsByDniOrEmail(clientWebDto.getDni(), clientWebDto.getEmail())).thenReturn(Boolean.FALSE);
 		var requestBody = mapper.writeValueAsString(createClientWebDto);
 		var mockrequest = post("/createClient")
 						.contentType(MediaType.APPLICATION_JSON_VALUE)

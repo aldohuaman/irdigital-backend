@@ -17,6 +17,7 @@ import intercorpretail.digital.reto.irdigitalbackend.dto.ClientWebDto;
 import intercorpretail.digital.reto.irdigitalbackend.dto.CreateClientWebDto;
 import intercorpretail.digital.reto.irdigitalbackend.dto.GetIndicatorsWebDto;
 import intercorpretail.digital.reto.irdigitalbackend.dto.ListClientWebDto;
+import intercorpretail.digital.reto.irdigitalbackend.exceptions.ClientExistsException;
 import intercorpretail.digital.reto.irdigitalbackend.dto.GetIndicatorsWebDto.BirthRate;
 import intercorpretail.digital.reto.irdigitalbackend.repository.ClientRepository;
 import intercorpretail.digital.reto.irdigitalbackend.service.IClientService;
@@ -35,6 +36,11 @@ public class ClientServiceImpl implements IClientService {
 	@Override
 	public CreateClientWebDto createClient(CreateClientWebDto webRequest) {
 		var clientWebRequest = webRequest.getClient();
+		var clientExists = clientRepository.existsByDniOrEmail(clientWebRequest.getDni(), clientWebRequest.getEmail());
+		if(Boolean.TRUE.equals(clientExists)) {
+			throw new ClientExistsException("Cliente con dni o email ya existe");
+		}
+		
 		var requestDb = new Client();
 		requestDb.setBirthDate(clientWebRequest.getBirthDate());
 		requestDb.setCreationDate(new Date());
